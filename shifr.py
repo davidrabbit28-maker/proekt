@@ -17,4 +17,4 @@ def shifr(x):
             sl += morse_code[i]
     return sl
 
-print(shifr("David"))
+print(shifr("Ulugbek"))
