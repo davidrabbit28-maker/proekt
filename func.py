@@ -58,3 +58,11 @@ def d(*args, action = "сумма"):
             shetchik2 *= i
         return shetchik2
 print(d(10, 5, 1, action="умножение"))
+
+
+def test_4(*args):
+    for i in args:
+        print(i)
+
+
+print(test_4("Привет", 3, 6.4))
