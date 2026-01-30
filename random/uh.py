@@ -2,13 +2,18 @@ from tkinter import HIDDEN, NORMAL, Tk, Canvas
 import random
 
 def change_color():
-    pet_color =['SkyBlue1', 'tomato', ' yellow', 'black', 'purple', 'green', 'orange']
-    c.body_color = random.choice(pet_color)
-    c.itemconfigure(body, outline=c.body_color, fill=c.body_color)
-    c.itemconfigure(ear_left, outline=c.body_color, fill=c.body_color)
-    c.itemconfigure(ear_right, outline=c.body_color, fill=c.body_color)
-    c.itemconfigure(foot_left, outline=c.body_color, fill=c.body_color)
-    c.itemconfigure(foot_right, outline=c.body_color, fill=c.body_color)
+    pet_color =['SkyBlue1', 'tomato', 'yellow', 'black', 'purple', 'green', 'orange']
+    pet_parts = [body, ear_left, ear_right, foot_left, foot_right]
+    choised = random.choice(pet_color)
+
+    while choised == c.body_color:
+        choised = random.choice(pet_color)
+    
+    c.body_color = choised
+
+    for i in pet_parts:
+        c.itemconfigure(i, outline=c.body_color, fill=c.body_color)
+
     root.after(3000, change_color)
 
 def toggle_eyes():
@@ -28,14 +33,15 @@ def blink():
     root.after(2000, blink)
 
 def show_happy(event):
-    if(20 <= event.x <= 350) and (20 <= event.y <= 350):
+    items = c.find_overlapping(event.x, event.y, event.x, event.y)
+    if body in items:
         c.itemconfigure(cheek_left, state=NORMAL)
         c.itemconfigure(cheek_right, state=NORMAL)
         c.itemconfigure(mouth_happy, state=NORMAL)
         c.itemconfigure(mouth_normal, state=HIDDEN)
         c.itemconfigure(mouth_sad, state=HIDDEN)
+ 
         c.happy_level = 10
-    return
 
 def hide_happy(event):
     c.itemconfigure(cheek_left, state=HIDDEN)
@@ -43,7 +49,7 @@ def hide_happy(event):
     c.itemconfigure(mouth_happy, state=HIDDEN)
     c.itemconfigure(mouth_normal, state=NORMAL)
     c.itemconfigure(mouth_sad, state=HIDDEN)
-    return
+    
 
 def toggle_tongue():
     if not c.tongue_out:
@@ -71,7 +77,6 @@ def cheeky(event):
     hide_happy(event)
     root.after(1000, toggle_tongue)
     root.after(1000,toggle_pupils)
-    return
 
 def sad():
     if c.happy_level == 0:
@@ -79,7 +84,7 @@ def sad():
         c.itemconfigure(mouth_normal, state=HIDDEN)
         c.itemconfigure(mouth_sad, state=NORMAL)
     else:
-        c.happy_level =c.happy_level - 1
+        c.happy_level = c.happy_level - 1
     root.after(500, sad) 
 
 root = Tk()
