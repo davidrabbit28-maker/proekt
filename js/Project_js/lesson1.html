@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+
+
+    <head>
+        <title>
+            Эксперименты в АшТиЭмель
+        </title>
+        <style>
+            h1 {
+                background: rgba(72, 238, 244, 0.578);
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1 id="output">
+            Купить audi
+        
+        </h1>   
+
+        <button onclick="show()">
+            Нажми меня!
+        </button>
+
+        <script>
+            let a = "любой текст";
+            let outputdiv = document.getElementById("output");
+            outputdiv.innerHTML = "Купить конфеты"
+            outputdiv.innerHTML = outputdiv.innerHTML + "<br>Продать бутылку" + a
+
+            function show(){
+                outputdiv.innerHTML = outputdiv.innerHTML + "<br>Продать бутылку" + a;
+                console.log("Функция show вызвана")
+            }
+        </script>
+    </body>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
