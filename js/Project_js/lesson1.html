@@ -21,24 +21,81 @@
         
         </h1>   
 
+        <input type="text" id="user_input" placeholder="Введите логин">
+
+
+
         <button onclick="show()">
             Нажми меня!
         </button>
+        
+        <h2>
+            Мой список покупок
+        </h2>
+
+        <input type="text" id="shop" placeholder="Название товара">
+
+
+        <button onclick="add_item()">
+            Добавить товар
+        </button>
+
 
         <script>
-            let a = "любой текст";
+           
+
+
+            let a = "Хы-хы-хы";
             let outputdiv = document.getElementById("output");
             outputdiv.innerHTML = "Купить конфеты"
             outputdiv.innerHTML = outputdiv.innerHTML + "<br>Продать бутылку" + a
 
             function show(){
-                outputdiv.innerHTML = outputdiv.innerHTML + "<br>Продать бутылку" + a;
-                console.log("Функция show вызвана")
+                let input_value = document.getElementById("user_input").value;
+
+
+                if (input_value === ""){
+                    outputdiv.innerHTML = "Проверяем информацию"
+                    outputdiv.style.color = "blue"
+                
+                } else{
+                    outputdiv.innerHTML = "Неправильный логин"
+                    outputdiv.style.color = "red"
+                }
+                    
+                console.log("Функция show вызвана");
             }
+            // // // // //
+            let items_added = [];
+
+            function add_item(){
+                let input = document.getElementById("shop");
+                let value = input.value;
+                items_added.push(value);
+                input.value = "";
+                // render();
+            };
+            console.log(items_added)
+
         </script>
     </body>
 
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
