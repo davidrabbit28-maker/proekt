@@ -1,117 +1,111 @@
 <!DOCTYPE html>
-
 <html>
-
-
-    <head>
-        <title>
-            Эксперименты в АшТиЭмель
-        </title>
-        <style>
-            h1 {
-                background: rgba(72, 238, 244, 0.578);
-                text-align: center;
-            }
-        </style>
-    </head>
-
-    <body>
-        <h1 id="output">
-            Купить audi
-        
-        </h1>   
-
-        <input type="text" id="user_input" placeholder="Введите логин">
-
-
-
-        <button onclick="show()">
-            Нажми меня!
-        </button>
-        
-        <h2>
-            Мой список покупок
-        </h2>
-
-        <input type="text" id="shop" placeholder="Название товара">
-
-
-        <button onclick="add_item()">
-            Добавить товар
-        </button>
-
-
-        <script>
-           
-
-
-            let a = "Хы-хы-хы";
-            let outputdiv = document.getElementById("output");
-            outputdiv.innerHTML = "Купить конфеты"
-            outputdiv.innerHTML = outputdiv.innerHTML + "<br>Продать бутылку" + a
-
-            function show(){
-                let input_value = document.getElementById("user_input").value;
-
-
-                if (input_value === ""){
-                    outputdiv.innerHTML = "Проверяем информацию"
-                    outputdiv.style.color = "blue"
-                
-                } else{
-                    outputdiv.innerHTML = "Неправильный логин"
-                    outputdiv.style.color = "red"
-                }
-                    
-                console.log("Функция show вызвана");
-            }
-            // // // // //
-            let items_added = [];
-
-            function add_item(){
-                let input = document.getElementById("shop");
-                let value = input.value;
-                items_added.push(value);
-                input.value = "";
-                // render();
-            };
-            console.log(items_added)
-
-        </script>
-    </body>
-
+<head>
+    <title>Эксперименты в АшТиЭмель</title>
+    <style>
+        h1 {
+            background: rgba(72, 238, 244, 0.578);
+            text-align: center;
+        }
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+        input {
+            padding: 8px;
+            margin: 5px 0;
+        }
+        button {
+            padding: 8px 15px;
+            margin: 5px 5px 5px 0;
+            cursor: pointer;
+        }
+        #list_display {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            background: #f9f9f9;
+            min-height: 30px;
+            text-align: left;
+        }
+        .counter {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="output">Купить audi</h1>   
+    <input type="text" id="user_input" placeholder="Введите логин">
+    <button onclick="show()">Нажми меня!</button>
+    
+    <hr>
     
 
+    <h2>Мой список покупок</h2>
+    <input type="text" id="shop" placeholder="Название товара">
+    <button onclick="add_item()">Добавить товар</button>
+    
+
+    <div id="list_display">Список пуст</div>
+    
+
+    <div id="counter" class="counter">Всего товаров: 0</div>
+
+    <script>
+
+        let a = "Хы-хы-хы";
+        let outputdiv = document.getElementById("output");
+        outputdiv.innerHTML = "Купить конфеты";
+        outputdiv.innerHTML = outputdiv.innerHTML + "<br>Продать бутылку" + a;
+
+        function show(){
+            let input_value = document.getElementById("user_input").value;
+
+            if (input_value === ""){
+                outputdiv.innerHTML = "Проверяем информацию";
+                outputdiv.style.color = "blue";
+            } else{
+                outputdiv.innerHTML = "Неправильный логин";
+                outputdiv.style.color = "red";
+            }
+            console.log("Функция show вызвана");
+        }
 
 
+        let items_added = []; // Массив хранится ГЛОБАЛЬНО, чтобы не сбрасывался
 
 
+        function render() {
+            let display = document.getElementById("list_display");
+            let counter = document.getElementById("counter");
+            
+            if (items_added.length === 0) {
+                display.innerHTML = "Список пуст";
+            } else {
+                // join("<br>") превращает массив ["Хлеб", "Молоко"] в строку "Хлеб<br>Молоко"
+                display.innerHTML = items_added.join("<br>");
+            }
+            
 
+            counter.innerHTML = "Всего товаров: " + items_added.length;
+        }
 
+        function add_item(){
+            let input = document.getElementById("shop");
+            let value = input.value;
+            
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            if (value !== "") {
+                items_added.push(value);  
+                input.value = "";         
+                render();                
+            }
+        }
+        
+        render();
+        
+    </script>
+</body>
 </html>
